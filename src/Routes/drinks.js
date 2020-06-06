@@ -3,11 +3,8 @@ var router = express.Router();
 
 var drinkController = require('../Controllers/drinkController')
 
-router.get('/', (req, res, next) => {
-    console.log(111112222)
-})
+// router.get('/', drinkController.getDrinks)
 
-
-
+router.get('/', drinkController.getDrinks) 
 
 module.exports = router;
