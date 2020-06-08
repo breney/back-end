@@ -15,11 +15,11 @@ exports.signup = function (req, res) {
   var { name } = req.body
   var { email } = req.body;
   var { password } = req.body;
+  console.log(name, email)
+
   User.findOne({
     where: {
-      email: email,
-      name: name,
-      password: password
+      email:email
     }
   }).then(result => {
     if (result == null) {
@@ -28,24 +28,23 @@ exports.signup = function (req, res) {
               const token = generateAccessToken(email, password);
               req.session.user = createdUser;
               req.session.token = token;
-              //res.redirect('/profile');
-              console.log("SignUp Feito")
+            
+              res.redirect('/drinks');
         });
     }
     else {
-      req.flash('signupMessage', 'That e-mail is already taken.');
-      //res.redirect('/signup');
-      console.log('CACA')
+      req.flash('signupMessage', 'Email inserido ja está a ser utilizado');
+      res.redirect('/signup');
     }
   }).catch(function (err) {
-    // handle error;
-    //return done(err);
+    return done(err);
   });
 }
 
 exports.login = function (req, res) {
   var { email } = req.body;
   var { password } = req.body;
+
   User.findOne({
     where: {
       email: email,
@@ -53,26 +52,18 @@ exports.login = function (req, res) {
     }
   }).then(result => {
     if (result == null) {
-      req.flash('loginMessage', 'No user found with that e-mail.');
-      //res.redirect('/login');
-      console.log('EMAIL ERRADO')
+      req.flash('loginMessage', 'Erro no login. Email ou password inserida esta errada!');
+      res.redirect('/')  
     }
-    else if (result.password != password) {
-      req.flash('loginMessage', 'Oops! Wrong password.');
-      //res.redirect('/login');
-      console.log('PASSWORD ERRADO')
-
-    } else {
-      // TODO: call generate token and add it to user session, redirect to profile
+       else {
+     
       const token = generateAccessToken(email, password);
       req.session.user = result;
       req.session.token = token;
-      //res.redirect('/profile');
-      console.log("Feito")
+      res.redirect('/drinks');
     }
   }).catch(function (err) {
-    // handle error;
-    //return done(err);
+    return done(err);
   });
 }
 

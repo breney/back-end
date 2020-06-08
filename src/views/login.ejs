@@ -1,50 +1,32 @@
-<!doctype html>
 <html>
-<head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body        { padding-top:80px; }
-    </style>
-</head>
-<body>
-    
-    <div class="container">
-        <div class="row">
-           <div class="col col-md-2 ">
-           </div>
-           <div class="col col-md-8">
-              <form  action="/login" method="post" style="
-                 display: flex;
-                 flex-direction: column;
-                 align-items: center;
-                 margin-top: 10rem;">
-
-                 <img class="mb-4" src="https://cdn3.iconfinder.com/data/icons/security-3-1/512/access-512.png" alt="" width="72" height="72">
-
-
-                 <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
-                 
-                 <input  type="text"  name="email"  class="form-control" style="margin-bottom:10px;">
-             
-                 <input type="password"  name="password"   class="form-control" style="margin-bottom:10px;">
-               
-                 <button class="btn btn-lg btn-primary btn-block bg-danger" type="submit" >Log in</button>
-                 <hr>
-
-                  <p>Need an account? <a href="/signup">Signup</a></p>
-   
-                 <p class="mt-5 mb-3 text-muted">© Bruno Pereira 2020-2021</p>
-              </form>
-           </div>
-           <div class="col col-md-2">
-            <% if (message.length > 0) { %>
-               <div class="alert alert-danger"><%= message %></div>    
-            <% } %>
-           </div>
-          
-        </div>
-     </div>
-
-</body>
+   <head>
+      <title>Log in</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   </head>
+   <body>
+      <div class="container">
+      <div class="row">
+         <div class="col col-md-2 ">
+         </div>
+         <div class="col col-md-8">
+            <form  action="/login" method="post" style="
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               margin-top: 10rem;">
+               <img class="mb-4" src="https://cdn3.iconfinder.com/data/icons/security-3-1/512/access-512.png" alt="" width="72" height="72">
+               <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
+               <input  type="text"  name="email"  class="form-control" style="margin-bottom:10px;">
+               <input type="password"  name="password"   class="form-control" style="margin-bottom:10px;">
+               <button class="btn btn-lg btn-primary btn-block bg-danger" type="submit" >Log in</button>
+               <hr>
+               <p>Need an account? <a href="/signup">Signup</a></p>
+               <p class="mt-5 mb-3 text-muted">© Bruno Pereira 2020-2021</p>
+               <hr>
+               <% if (error.length > 0) { %>
+               <div class="alert alert-danger"><%= error %></div>
+               <% } %>
+            </form>
+         </div>
+      </div>
+   </body>

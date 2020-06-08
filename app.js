@@ -22,16 +22,17 @@ app.set('views engine', 'ejs');
 
 var config = require('./config')
 
-var drinkRouter = require('./src/Routes/drinks')
+
 var indexRouter = require('./src/Routes/index')
 
 // Obter Token
-// var crypto = require('crypto')
-//var tokenSecret = crypto.randomBytes(64).toString('hex')
-//console.log(tokenSecret)
+var crypto = require('crypto')
+var tokenSecret = crypto.randomBytes(64).toString('hex')
+console.log(tokenSecret)
 
 
-
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' }) 
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -50,4 +51,10 @@ app.listen(port, function () {
 
 
 app.use('/',indexRouter)
-app.use('/drinks', drinkRouter)
+
+app.post('/upload', upload.single('file'), function (req, res, next) {
+  // req.files is array of `photos` files
+  console.log(req.file);
+  io.sockets.emit('send_img', { img: '/uploads/' + req.file.filename});
+  res.send('file uploaded');
+})
