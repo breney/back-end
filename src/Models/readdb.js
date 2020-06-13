@@ -4,17 +4,14 @@ var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 
-const DrinkModel = require('../Models/drink');
-const UserModel = require('../Models/user')
+const DrinkModel = require('./drink');
+const UserModel = require('./user')
 
 var db = {};
 
 var config = require('../../config')
 
 let sequelize = new Sequelize(config.DB.DATABASE, config.DB.USER, config.DB.PASSWORD, { dialect: "mysql" });
-
-const Drink = DrinkModel(sequelize, Sequelize);
-const User = UserModel(sequelize,Sequelize)
 
 fs
   .readdirSync(__dirname)
@@ -31,6 +28,11 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+const Drink = DrinkModel(sequelize, Sequelize);
+const User = UserModel(sequelize,Sequelize)
+
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

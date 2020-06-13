@@ -24,7 +24,7 @@ var config = require('./config')
 
 
 var indexRouter = require('./src/Routes/index')
-
+var drinkRouter = require('./src/Routes/drink')
 // Obter Token
 var crypto = require('crypto')
 var tokenSecret = crypto.randomBytes(64).toString('hex')
@@ -51,10 +51,6 @@ app.listen(port, function () {
 
 
 app.use('/',indexRouter)
+app.use('/',drinkRouter)
 
-app.post('/upload', upload.single('file'), function (req, res, next) {
-  // req.files is array of `photos` files
-  console.log(req.file);
-  io.sockets.emit('send_img', { img: '/uploads/' + req.file.filename});
-  res.send('file uploaded');
-})
+
