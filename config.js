@@ -1,5 +1,7 @@
-var dotenv = require('dotenv').config();
+var dotenv = require("dotenv");
+dotenv.config();
 
+//Configuração de variaveis para base de dados
 module.exports = {
   SERVER: {
     HOSTNAME: process.env.DB_HOST

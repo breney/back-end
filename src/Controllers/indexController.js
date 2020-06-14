@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
-const User = require('../Models/readdb').User;
+const User = require('../Models/sequelize').User;
 
+
+//Função que permite selecionar todos os dados da tabela users
 exports.getUsers = function (req, res, next) {
   User.findAll()
       .then(user => {
@@ -8,6 +10,7 @@ exports.getUsers = function (req, res, next) {
       });
 };
 
+//Função que permite fazer signup e adicionando a tabela users
 exports.signup = function (req, res) {
 
   var today = new Date();
@@ -39,7 +42,7 @@ exports.signup = function (req, res) {
               req.session.user = createdUser;
               req.session.token = token;
             
-              res.redirect('/drinks');
+              res.redirect('/imgupload');
 
               res.send(JSON.stringify( user,null,4))
 
@@ -52,10 +55,10 @@ exports.signup = function (req, res) {
       res.send("Email inserido ja está a ser utilizado !")
     }
   }).catch(function (err) {
-    return done(err);
+    return err;
   });
 }
-
+//Função que permite fazer login 
 exports.login = function (req, res) {
   var { email } = req.body;
   var { password } = req.body;
@@ -82,15 +85,15 @@ exports.login = function (req, res) {
       
       req.session.user = result;
       req.session.token = token;
-      res.redirect('/drinks');
+      res.redirect('/imgupload');
 
       res.send(JSON.stringify(user,null,4))
     }
   }).catch(function (err) {
-    return done(err);
+    return err;
   });
 }
-
+//funcao que permite gerar um token para um login
 function generateAccessToken(email,password) {
   return jwt.sign ({ email , password}, process.env.TOKEN_SECRET, {expiresIn: '1800s'})
 }

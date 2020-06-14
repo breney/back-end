@@ -6,7 +6,6 @@ var dotenv = require("dotenv");
 dotenv.config();
 
 
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -31,8 +30,7 @@ var tokenSecret = crypto.randomBytes(64).toString('hex')
 console.log(tokenSecret)
 
 
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' }) 
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -49,8 +47,9 @@ app.listen(port, function () {
   });
 
 
-
+//Caminhos usados para o router, para obter os gets , posts e deletes /src/routes
 app.use('/',indexRouter)
 app.use('/',drinkRouter)
+
 
 

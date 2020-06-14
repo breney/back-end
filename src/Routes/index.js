@@ -2,37 +2,42 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken')
 
+//Obter funções do indexcontroller
 var indexController = require('../Controllers/indexController')
 
 
-//Get All users
-router.get('/user',indexController.getUsers)
+//Obter todos utilizadores
+router.get('/users',indexController.getUsers)
 
-
+//Obter pagina principal de login
 router.get('/', function (req, res) {
   res.render('login.ejs', { error: req.flash('loginMessage')} );
 });
 
-//Do Login  example : { "email" : "bruno@gmail.com", "password" : "123123"}
+// Login  example : { "email" : "bruno@gmail.com", "password" : "123123"}
 router.post('/login', indexController.login);
 
 router.get('/signup', function (req, res) {
   res.render('signup.ejs', { error: req.flash('signupMessage')} );
   });
 
-//Do Signup  example : {"name" : "Bruno", "email" : "brunopereira@gmail.com", "password" : "123"}
+// Signup  example : {"name" : "Bruno", "email" : "brunopereira@gmail.com", "password" : "123"}
 router.post('/signup', indexController.signup);
 
-
-router.get('/drinks',authenticateTokenFromSession, function (req, res) {
- res.render('drink.ejs', {user: req.session.user});
+//Ir para pagina onde podemos fazer imgupload 
+router.get('/imgupload',authenticateTokenFromSession, function (req, res) {
+ res.render('imgupload.ejs', {user: req.session.user});
   });
 
-router.delete('/logout', logout, function(req,res){
-  console.log("OLA")
-  res.render('/')
+  //Logout mandando para o ficheiro login de volta
+router.get('/logout', function(req,res){
+    req.flash('loginMessage', 'Logout feito com sucesso!');
+    res.render('login.ejs', { error: req.flash('loginMessage')})
 })
 
+
+
+//Função para obter token de um login
 function authenticateTokenFromSession(req,res,next){
   const token = req.session.token;
   if(token == null) return res.sendStatus(401);
@@ -44,9 +49,5 @@ function authenticateTokenFromSession(req,res,next){
   })
 }
 
-function logout(req,res,next){
-  const token = req.session.token;
-  jwt.destroy(token);
- 
-}
+
 module.exports = router;

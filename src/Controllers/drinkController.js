@@ -1,5 +1,6 @@
-const  Drink  = require('../Models/readdb').Drink;
+const  Drink  = require('../Models/sequelize').Drink;
 
+//Função que permite selecionar todos dados da tabela drink
 exports.getDrinks = function (req, res, next) {
     Drink.findAll()
         .then(drinks => {
@@ -7,6 +8,7 @@ exports.getDrinks = function (req, res, next) {
         });
 };
 
+//Função que permite selecionar os dados por parametro id da tabela drink
 exports.getDrinksbyID = function (req, res, next) {
     Drink.findOne({
         where :{
@@ -17,6 +19,7 @@ exports.getDrinksbyID = function (req, res, next) {
     })
 };
 
+//Função que permite criar dados na tabela drink
 exports.createDrink = function (req, res, next) {
 
   var today = new Date();
@@ -42,7 +45,7 @@ exports.createDrink = function (req, res, next) {
       }
   })
 };
-
+//Função que permite fazer update em dados na tabela drink
 exports.updateDrink = function(req,res,next){
 
     var { name } = req.body
@@ -59,7 +62,7 @@ exports.updateDrink = function(req,res,next){
                 
         })     
 }
-
+//Função que permite fazer delete em dados na tabela drink
 exports.deleteDrink = function(req,res,next){
        
         Drink.findOne({

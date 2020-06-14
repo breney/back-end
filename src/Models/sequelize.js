@@ -11,6 +11,7 @@ var db = {};
 
 var config = require('../../config')
 
+//Conexão base de dados
 let sequelize = new Sequelize(config.DB.DATABASE, config.DB.USER, config.DB.PASSWORD, { dialect: "mysql" });
 
 fs

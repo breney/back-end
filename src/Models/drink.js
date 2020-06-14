@@ -1,3 +1,4 @@
+//Set dos dados na tabela drinks no sequelize
 module.exports = (sequelize, DataTypes) => {
     const Drink = sequelize.define('drinks', {
     id: {

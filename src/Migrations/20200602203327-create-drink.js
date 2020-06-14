@@ -1,4 +1,4 @@
-
+//Criar tabela drinks
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('drinks', {

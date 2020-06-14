@@ -4,14 +4,14 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
    </head>
    <body>
-      <form  action="/logout" method="delete">
+      <form  action="/logout" method="get">
       <nav class="navbar navbar-expand-sm navbar-dark  bg-dark border-bottom border-white">
          <a class="navbar-brand" href="#">
          <img src="https://i.pinimg.com/originals/f4/0f/2c/f40f2c3f97c9bcd6d0737431a23075c2.png" width="30" height="30" class="d-inline-block align-top" alt="">
          </a>
          <div class="collapse navbar-collapse" >
             <ul class="navbar-nav mr-auto">
-               <a href="" class=" text-white mr-1"> Home</a>
+       
                <a href="" class=" text-white ml-1"> ImageUpload</a>
             </ul>
          </div>
@@ -24,11 +24,19 @@
       </nav>
    </form>
       <div class="container">
-      
-         <form method="post" enctype="multipart/form-data"> 
-            <input type="file" name="imagem">
-            <input type="submit" value="upload">
-         </form>
+         <div class="d-flex justify-content-center">
+            
+            <section id="image_zone"> 
+               <form id="uploadForm" method="post" enctype='multipart/form-data'>        
+                 <input id="image_upload" type="file" name="imageupload" value="Default name">
+                 <input id="upload_btn" type="submit" value="Upload">
+               </form>
+               <br>
+               <img src="<%= typeof file != 'undefined' ? file : '' %>" alt="">
+             </section>
+
+         </div>
+         
 
       </div>
    </body>
